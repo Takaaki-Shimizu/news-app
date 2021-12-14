@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, FlatList, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ListItem from './components/ListItem';
-import articles from './dummies/articles';
+import dummiyArticles from './dummies/articles';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setArticles(dummiyArticles);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
